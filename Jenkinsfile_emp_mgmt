@@ -1,0 +1,27 @@
+pipeline {  
+
+  agent any
+  
+ 
+  stages {
+    
+    stage('Checkout') {
+      steps {
+        git 'https://github.com/nileshkardile/EMP_MGMT.git'
+      }
+    }
+   
+    stage('Build & Cretae Docker') {
+      steps{
+        
+		sh 'cd ${WORKSPACE} ; ./mvnw package -Pprod verify jib:dockerBuild'
+      }
+    }
+     stage('Docker Push') {
+      steps{
+       		echo "Verfied..."
+                      
+      }
+    }
+  }
+}
