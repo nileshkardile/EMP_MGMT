@@ -14,7 +14,7 @@ pipeline {
     stage('Build & Cretae Docker') {
       steps{
         
-		sh 'cd ${WORKSPACE} ; ./mvnw package -Pprod verify jib:dockerBuild'
+		sh 'cd ${WORKSPACE} ;chmod 744 ./mvnw; ./mvnw package -Pprod verify jib:dockerBuild'
       }
     }
      stage('Docker Push') {
