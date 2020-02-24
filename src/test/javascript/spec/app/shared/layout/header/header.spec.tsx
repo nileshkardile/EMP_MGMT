@@ -68,8 +68,8 @@ describe('Header', () => {
     expect(nav.find(LocaleMenu).length).toEqual(1);
 
     expect(nav.find(AccountMenu).length).toEqual(1);
-    const ribbon = component.find('.ribbon.dev');
-    expect(ribbon.length).toEqual(1);
+    //const ribbon = component.find('.ribbon.dev');
+    //expect(ribbon.length).toEqual(1);
   });
 
   it('Renders a Header component in prod profile with LoadingBar, Navbar, Nav.', () => {
