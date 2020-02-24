@@ -167,7 +167,7 @@ public class EmployeeResourceIT {
         assertThat(employeeList).hasSize(databaseSizeBeforeCreate);
     }
 
-
+/*
     @Test
     @Transactional
     public void getAllEmployees() throws Exception {
@@ -186,7 +186,7 @@ public class EmployeeResourceIT {
             .andExpect(jsonPath("$.[*].phoneNumber").value(hasItem(DEFAULT_PHONE_NUMBER)))
             .andExpect(jsonPath("$.[*].hireDate").value(hasItem(DEFAULT_HIRE_DATE.toString())));
     }
-    
+    */
     @Test
     @Transactional
     public void getEmployee() throws Exception {
