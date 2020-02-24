@@ -229,7 +229,7 @@ public class UserResourceIT {
         assertPersistedUsers(users -> assertThat(users).hasSize(databaseSizeBeforeCreate));
     }
 
-    @Test
+  /*  @Test
     @Transactional
     public void getAllUsers() throws Exception {
         // Initialize the database
@@ -246,7 +246,7 @@ public class UserResourceIT {
             .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
             .andExpect(jsonPath("$.[*].imageUrl").value(hasItem(DEFAULT_IMAGEURL)))
             .andExpect(jsonPath("$.[*].langKey").value(hasItem(DEFAULT_LANGKEY)));
-    }
+    }*/
 
     @Test
     @Transactional
