@@ -12,7 +12,7 @@ pipeline {
     
     stage('Checkout') {
       steps {
-        git 'https://github.com/nileshkardile/Demo-App.git'
+        git 'https://github.com/nileshkardile/EMP_MGMT.git'
       }
     }
    
@@ -30,22 +30,22 @@ pipeline {
 				
 				if [ "$VERSION" == "v1" ]; then
 				#replace docker tag
-				sed -i "s/latest/$DOCKER_TAG/g" EMP_MGMT/src/platform/kube/emp-mgmt-deploy.yaml
-				sed -i "s/reasonForChange/$CHANGE_LOG/g" EMP_MGMT/src/platform/kube/emp-mgmt-deploy.yaml
+				sed -i "s/latest/$DOCKER_TAG/g" src/platform/kube/emp-mgmt-deploy.yaml
+				sed -i "s/reasonForChange/$CHANGE_LOG/g" src/platform/kube/emp-mgmt-deploy.yaml
 				# create service and deployment for employee management app
-				sudo /usr/bin/kubectl apply -f EMP_MGMT/src/platform/kube/emp-mgmt-deploy.yaml
+				sudo /usr/bin/kubectl apply -f src/platform/kube/emp-mgmt-deploy.yaml
 
 				# create virtual service, gateway and destination rule for bookinfo
-				sudo /usr/bin/kubectl apply -f EMP_MGMT/src/platform/kube/employee-mgmt-vs.yaml
+				sudo /usr/bin/kubectl apply -f src/platform/kube/employee-mgmt-vs.yaml
 				
 				elif [ "$VERSION" == "v2" ]; then
-				sed -i "s/latest/$DOCKER_TAG/g" EMP_MGMT/src/platform/kube/emp-mgmt-deploy-v2.yaml
-				sed -i "s/reasonForChange/$CHANGE_LOG/g" EMP_MGMT/src/platform/kube/emp-mgmt-deploy-v2.yaml
+				sed -i "s/latest/$DOCKER_TAG/g" src/platform/kube/emp-mgmt-deploy-v2.yaml
+				sed -i "s/reasonForChange/$CHANGE_LOG/g" src/platform/kube/emp-mgmt-deploy-v2.yaml
 				# create service and deployment for employee management app
-				sudo /usr/bin/kubectl apply -f EMP_MGMT/src/platform/kube/emp-mgmt-deploy-v2.yaml
+				sudo /usr/bin/kubectl apply -f src/platform/kube/emp-mgmt-deploy-v2.yaml
 
 				# create virtual service, gateway and destination rule for bookinfo
-				sudo /usr/bin/kubectl apply -f EMP_MGMT/src/platform/kube/employee-mgmt-vs-v2.yaml
+				sudo /usr/bin/kubectl apply -f src/platform/kube/employee-mgmt-vs-v2.yaml
 				
 				else
                                 echo "Invalid version number supplied. Please supply either v1 or v2 as version number."				
