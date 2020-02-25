@@ -19,8 +19,21 @@ pipeline {
     }
      stage('Docker Push') {
       steps{
-       		echo "Verfied..."
-                      
+       		script {
+               sh '''#!/bin/bash
+               #Docker Login
+	echo Incedo123 | docker login --username demoapp2020 --password-stdin
+	#Push image to docker hub
+	
+	echo "Pushing Docker Image: demoapp2020/emp-mgmt:superhero"
+	# Retag docker image
+	sudo docker tag jhipster_demo:latest demoapp2020/emp-mgmt:superhero;
+	#Docker Push
+	sudo docker push demoapp2020/emp-mgmt:superhero
+	#Clean up older images
+	sudo docker rmi demoapp2020/emp-mgmt:superhero
+	sudo docker rmi jhipster_demo:latest
+	}               
       }
     }
   }
