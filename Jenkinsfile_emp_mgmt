@@ -11,10 +11,10 @@ pipeline {
       }
     }
    
-    stage('Build & Cretae Docker') {
+    stage('Build & Create Docker') {
       steps{
         
-		sh 'cd ${WORKSPACE} ;chmod 744 ./mvnw; ./mvnw ;./mvnw package -Pprod verify jib:dockerBuild'
+		sh 'chmod -R 777 ${WORKSPACE}; cd ${WORKSPACE} ; ./mvnw ;./mvnw package -Pprod verify jib:dockerBuild'
       }
     }
      stage('Docker Push') {
