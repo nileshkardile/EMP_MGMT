@@ -14,7 +14,7 @@ pipeline {
     stage('Build & Create Docker') {
       steps{
         
-		sh 'chmod -R 755 ${WORKSPACE}; cd ${WORKSPACE} ; ./mvnw ;./mvnw package -Pprod verify jib:dockerBuild'
+		sh 'chmod -R 755 ${WORKSPACE}; cd ${WORKSPACE} ; ./mvnw package -Pprod verify jib:dockerBuild'
       }
     }
      stage('Docker Push') {
