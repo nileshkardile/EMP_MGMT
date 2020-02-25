@@ -1,0 +1,61 @@
+##################################################################################################
+# Emp_Mgmt services
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: employee-mgmt
+  labels:
+    app: employee-mgmt
+    service: employee-mgmt
+spec:
+  ports:
+  - port: 8080
+    name: http
+  selector:
+    app: employee-mgmt
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: employee-mgmt-info
+  labels:
+    account: employee-mgmt
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations: 
+    kubernetes.io/change-cause: "reasonForChange"
+  name: employee-mgmt-v1
+  labels:
+    app: employee-mgmt
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: employee-mgmt
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: employee-mgmt
+        version: v1
+    spec:
+      serviceAccountName: employee-mgmt-info
+      containers:
+      - name: employee-mgmt
+        image: demoapp2020/emp-mgmt:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080        
+        volumeMounts:
+        - name: tmp
+          mountPath: /tmp
+      imagePullSecrets:
+      - name: book-info-secret
+      volumes:
+      - name: tmp
+        emptyDir: {}
+---
