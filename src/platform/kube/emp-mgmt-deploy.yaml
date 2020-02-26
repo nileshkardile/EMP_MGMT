@@ -46,7 +46,7 @@ spec:
       serviceAccountName: employee-mgmt-info
       containers:
       - name: employee-mgmt
-        image: demoapp2020/emp-mgmt:1.0.0.16
+        image: demoapp2020/emp-mgmt:latest
         imagePullPolicy: Always
         env:
         - name: _JAVA_OPTIONS 
@@ -65,7 +65,7 @@ spec:
         - name: tmp
           mountPath: /tmp
       imagePullSecrets:
-      - name: book-info-secret
+      - name: emp-mgmt-secret
       volumes:
       - name: tmp
         emptyDir: {}
