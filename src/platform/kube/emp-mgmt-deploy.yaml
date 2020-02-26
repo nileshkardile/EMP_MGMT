@@ -25,7 +25,7 @@ metadata:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations: 
+  annotations:
     kubernetes.io/change-cause: "reasonForChange"
   name: employee-mgmt-v1
   labels:
@@ -46,10 +46,21 @@ spec:
       serviceAccountName: employee-mgmt-info
       containers:
       - name: employee-mgmt
-        image: demoapp2020/emp-mgmt:latest
+        image: demoapp2020/emp-mgmt:1.0.0.16
         imagePullPolicy: Always
+	env:
+	 - name: _JAVA_OPTIONS 
+	   value: -Xmx512m -Xms256m
+	 - name: SPRING_PROFILES_ACTIVE
+	   value: prod,swagger
+	 - name: MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED
+	   value: true
+	 - name: SPRING_DATASOURCE_URL
+	   value: jdbc:postgresql://postgres:5432/jhipster_demo
+	 - name: JHIPSTER_SLEEP
+	   value: 30 
         ports:
-        - containerPort: 8080        
+        - containerPort: 8080
         volumeMounts:
         - name: tmp
           mountPath: /tmp
@@ -58,4 +69,4 @@ spec:
       volumes:
       - name: tmp
         emptyDir: {}
----
+
