@@ -42,7 +42,8 @@ pipeline {
 
 				# create virtual service, gateway and destination rule for bookinfo
 				sudo /usr/bin/kubectl apply -f src/platform/kube/employee-mgmt-vs.yaml
-				
+				# create destination rule
+				sudo /usr/bin/kubectl apply -f src/platform/kube/employee-mgmt-ds.yaml
 				
 				
 				elif [ "$VERSION" == "v2" ]; then
