@@ -31,13 +31,5 @@ spec:
         host: employee-mgmt
         port:
           number: 8080
-    - destination:
-        host: employee-mgmt
-        subset: v1
-      weight: 50
-    - destination:
-        host: employee-mgmt
-        subset: v2
-      weight: 50
 ---
 
