@@ -44,6 +44,23 @@ spec:
         version: v1
     spec:
       serviceAccountName: employee-mgmt-info
+      initContainers:
+        - name: init-ds
+          image: busybox:latest
+          command:
+            - '/bin/sh'
+            - '-c'
+            - |
+              while true
+              do
+                rt=$(nc -z -w 1 jhipster-demo-postgresql 5432)
+                if [ $? -eq 0 ]; then
+                  echo "DB is UP"
+                  break
+                fi
+                echo "DB is not yet reachable;sleep for 10s before retry"
+                sleep 10
+              done
       containers:
       - name: employee-mgmt
         image: demoapp2020/emp-mgmt:latest
@@ -52,13 +69,14 @@ spec:
         - name: _JAVA_OPTIONS 
           value: "-Xmx512m -Xms256m"
         - name: SPRING_PROFILES_ACTIVE
-          value: "prod,swagger"
-        #- name: MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED
-        #  value: true
+          value: "prod"
+        - name: MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED
+          value: "true"
         - name: SPRING_DATASOURCE_URL
-          value: "jdbc:postgresql://postgres:5432/jhipster_demo"
+          value: "jdbc:postgresql://postgres.employee-mgmt.svc.cluster.local:5432/employee-mgmt-v1"
         - name: JHIPSTER_SLEEP
-          value: "30" 
+          value: "30"
+        - name: 
         ports:
         - containerPort: 8080
         volumeMounts:
