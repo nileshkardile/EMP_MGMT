@@ -6,3 +6,4 @@ metadata:
     app: postgres
 data:
   POSTGRES_USER: jhipster_demo
+  POSTGRES_PASSWORD: admin123

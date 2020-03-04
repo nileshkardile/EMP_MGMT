@@ -53,7 +53,7 @@ spec:
             - |
               while true
               do
-                rt=$(nc -z -w 1 jhipster-demo-postgresql 5432)
+                rt=$(nc -z -w 1 postgres 5432)
                 if [ $? -eq 0 ]; then
                   echo "DB is UP"
                   break
@@ -63,7 +63,7 @@ spec:
               done
       containers:
       - name: employee-mgmt
-        image: demoapp2020/emp-mgmt:latest
+        image: demoapp2020/emp-mgmt:1.0.0.19
         imagePullPolicy: Always
         env:
         - name: _JAVA_OPTIONS 
@@ -73,10 +73,9 @@ spec:
         - name: MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED
           value: "true"
         - name: SPRING_DATASOURCE_URL
-          value: "jdbc:postgresql://postgres.employee-mgmt.svc.cluster.local:5432/employee-mgmt-v1"
+          value: "jdbc:postgresql://postgres.default.svc.cluster.local:5432/employee-mgmt-v1"
         - name: JHIPSTER_SLEEP
           value: "30"
-        - name: 
         ports:
         - containerPort: 8080
         volumeMounts:
